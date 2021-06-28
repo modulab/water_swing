@@ -36,9 +36,9 @@ void checkIdle(){
       digitalWrite(valvaGenerala2Pin, LOW);
       digitalWrite(valvaGenerala3Pin, LOW);
   } else {
-      //digitalWrite(valvaGenerala1Pin, HIGH);
-      //digitalWrite(valvaGenerala2Pin, HIGH);
-      //digitalWrite(valvaGenerala3Pin, HIGH);
+      digitalWrite(valvaGenerala1Pin, HIGH);
+      digitalWrite(valvaGenerala2Pin, HIGH);
+      digitalWrite(valvaGenerala3Pin, HIGH);
   }
 }
 
