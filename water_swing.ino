@@ -35,9 +35,9 @@ void checkIdle(){
       digitalWrite(valvaGenerala2Pin, LOW);
       digitalWrite(valvaGenerala3Pin, LOW);
   } else {
-      digitalWrite(valvaGenerala1Pin, HIGH);
-      digitalWrite(valvaGenerala2Pin, HIGH);
-      digitalWrite(valvaGenerala3Pin, HIGH);
+      //digitalWrite(valvaGenerala1Pin, HIGH);
+      //digitalWrite(valvaGenerala2Pin, HIGH);
+      //digitalWrite(valvaGenerala3Pin, HIGH);
   }
 }
 
@@ -127,7 +127,8 @@ class Leagan {
         float max =0;
 
         float semn = delta * lastDelta;
-        if ((semn < 0) && (abs(unghi)>3)) {  // SE SCHIMBA SEMN
+        //if ((semn < 0) && (abs(unghi)>3)) {  // SE SCHIMBA SEMN
+        if (semn < 0) {  // SE SCHIMBA SEMN
           
             if (delta > 0) {
               directie = 1;
@@ -157,6 +158,9 @@ class Leagan {
           
         } // END SE SCHIMBA SEMN
 
+
+        // phi0 e maximul calculat intr-o parte. dar se va folosi si in partea cealalta. 
+        // asa ca trebuie sa i se schimbe semnul
         if (unghi>0) {
           phi0 = abs(phi0);
         } else {
@@ -166,7 +170,7 @@ class Leagan {
         if (valvaPin==valvaLeagan1Pin) {
            Serial.print(String(distanceAngle)+",");
           //Serial.println(String(directie));
-          Serial.println(String(abs(phi0 + directie*(abs(phi0)-abs(unghi)))));
+          Serial.println(String(abs(phi0 + directie*(abs(phi0)-abs(unghi))) - distanceAngle));
         } 
         //else {
         //  Serial.println(String(unghi));
@@ -174,7 +178,7 @@ class Leagan {
 
         //if ((abs(phi0)-directie*unghi) + abs(phi0) - distanceAngle > 10 ) {
         
-        if (( abs(phi0 + directie*(abs(phi0)-abs(unghi))) - distanceAngle < 3 ) && (abs(phi0)>10)){
+        if (( abs(phi0 + directie*(abs(phi0)-abs(unghi))) - distanceAngle < 5 ) && (abs(phi0)>10)){
              digitalWrite(valvaPin, HIGH);
             //Serial.println("ON");
         } else {
