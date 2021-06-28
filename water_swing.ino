@@ -12,6 +12,7 @@ int valvaGenerala3Pin = 4;
 int valvaLeagan1Pin = 7; // de modificat
 int valvaLeagan2Pin = 5; // de modificat
 
+int pot1 = A0;
 
 long idleTime =10 * 1000;
 long lastIdle = 0;
@@ -177,8 +178,11 @@ class Leagan {
         //}
 
         //if ((abs(phi0)-directie*unghi) + abs(phi0) - distanceAngle > 10 ) {
+
+        int val = analogRead(pot1);
+        val = map(val, 0, 1023, 0, 2);
         
-        if (( abs(phi0 + directie*(abs(phi0)-abs(unghi))) - distanceAngle < 5 ) && (abs(phi0)>10)){
+        if (( abs(phi0 + directie*(abs(phi0)-abs(unghi))) - distanceAngle < 3+val ) && (abs(phi0)>10)){
              digitalWrite(valvaPin, HIGH);
             //Serial.println("ON");
         } else {
